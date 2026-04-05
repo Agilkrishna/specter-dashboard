@@ -32,10 +32,11 @@ app.get('/api/scan', async (req, res) => {
         args.push('--secondary', `"${secondary}"`);
     }
     
-    console.log(`[EXEC] python ${args.join(' ')}`);
+    const pythonBin = process.platform === 'win32' ? 'python' : 'python3';
+    console.log(`[EXEC] ${pythonBin} ${args.join(' ')}`);
     
-    // Spawn LittleBrother bridge
-    const child = spawn('python', args, {
+    // Spawn Specter bridge
+    const child = spawn(pythonBin, args, {
         cwd: process.cwd(),
         shell: false
     });
