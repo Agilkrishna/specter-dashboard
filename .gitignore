@@ -1,0 +1,33 @@
+node_modules/
+dist/
+build/
+.env
+.env.*
+!.env.example
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+osint_tools/
+
+# OSINT Tool Artifacts
+results/
+captures/
+*.log
+
+# Deployment
+Dockerfile
+.dockerignore
+requirements.txt

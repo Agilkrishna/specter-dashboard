@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>OSINT Orchestrator | Cyber-Elite v3.0</title>
+    <meta name="description" content="Advanced OSINT Intelligence Orchestrator with real-time reconnaissance and deep analysis capabilities.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap">
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+<body class="dark-theme">
+
+    <!-- Animated Background Layers -->
+    <canvas id="particleCanvas"></canvas>
+    <div class="grid-overlay"></div>
+    <div class="scanline"></div>
+    <div class="vignette-overlay"></div>
+
+    <!-- App Layout -->
+    <div class="app-container">
+        
+        <!-- Mobile Header -->
+        <header class="mobile-header">
+            <button class="menu-toggle-btn" id="menuOpenBtn">
+                <span class="material-symbols-outlined">segment</span>
+            </button>
+            <div class="mobile-logo">
+                <span class="material-symbols-outlined logo-icon-sm cyber-pulse">security</span>
+                <span class="logo-text">OSINT <span class="accent-text">Orchestrator</span></span>
+            </div>
+            <div class="system-status-sm desktop-only">
+                <span class="status-indicator online"></span>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-group">
+                    <div class="logo-icon-container">
+                        <span class="material-symbols-outlined logo-icon">security</span>
+                        <div class="logo-ring"></div>
+                        <div class="logo-ring ring-2"></div>
+                    </div>
+                    <div class="logo-text-group">
+                        <h1 class="logo-text glitch-text" data-text="OSINT">OSINT</h1>
+                        <span class="logo-sub">ORCHESTRATOR v3.0</span>
+                    </div>
+                </div>
+                <button class="menu-close-btn" id="menuCloseBtn">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <!-- Data Stream Effect -->
+            <div class="data-stream-container">
+                <div class="data-stream"></div>
+            </div>
+
+            <nav class="tools-nav" id="toolsNav">
+                <!-- Navigation items dynamically populated -->
+            </nav>
+            <div class="sidebar-footer">
+                <div class="system-metrics">
+                    <div class="metric">
+                        <span class="metric-label">UPLINK</span>
+                        <span class="metric-value online-pulse">ACTIVE</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">LATENCY</span>
+                        <span class="metric-value" id="latencyValue">--ms</span>
+                    </div>
+                </div>
+                <div class="divider glow-divider"></div>
+                <div class="version-label">
+                    <span class="cyber-font">CYBER-ELITE</span> v3.0
+                </div>
+            </div>
+        </aside>
+
+        <!-- Menu Overlay for Mobile -->
+        <div class="menu-overlay" id="menuOverlay"></div>
+
+        <!-- Main Workspace -->
+        <main class="main-content">
+            <!-- Desktop Top Bar -->
+            <header class="top-bar">
+                <div class="tool-info">
+                    <div class="tool-icon-wrapper hex-border">
+                        <span class="material-symbols-outlined" id="currentToolIcon">account_circle</span>
+                        <div class="icon-scanner"></div>
+                    </div>
+                    <div class="tool-text">
+                        <h2 id="currentToolName" class="decode-text">Person Lookup</h2>
+                        <p id="currentToolDesc" class="desktop-only text-dim typewriter-text">Active reconnaissance on individuals.</p>
+                    </div>
+                </div>
+                <div class="top-controls">
+                    <div class="system-status desktop-only">
+                        <span class="status-indicator online"></span>
+                        <span>Backend Active</span>
+                    </div>
+                    <div class="hud-clock desktop-only" id="hudClock"></div>
+                </div>
+            </header>
+
+            <section class="workspace-area">
+                <!-- Input Panel -->
+                <div class="input-card holo-card" id="inputCard">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    <form id="inspectorForm">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label id="targetLabel" class="cyber-label">Primary Target</label>
+                                <div class="search-box neon-focus" style="display: flex; align-items: center;">
+                                    <span class="material-symbols-outlined">person_search</span>
+                                    <input type="text" id="targetInput" placeholder="..." required autocomplete="off" style="flex: 1;">
+                                    <button type="button" id="uploadImageBtn" style="display: none; background: transparent; border: none; color: var(--accent-cyan); cursor: pointer; padding: 0 16px;">
+                                        <span class="material-symbols-outlined">upload_file</span>
+                                    </button>
+                                    <input type="file" id="fileUpload" accept="image/*" style="display:none;" />
+                                    <div class="input-scan-line"></div>
+                                </div>
+                            </div>
+                            <div class="input-group" id="secondaryInputContainer" style="display: none;">
+                                <label id="secondaryLabel" class="cyber-label">Secondary Info</label>
+                                <div class="search-box neon-focus">
+                                    <span class="material-symbols-outlined">location_on</span>
+                                    <input type="text" id="secondaryInput" placeholder="..." autocomplete="off">
+                                    <div class="input-scan-line"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="toolHint" class="tool-hint"></div>
+                        <div class="action-bar">
+                            <button type="submit" class="btn-primary cyber-btn" id="submitBtn">
+                                <div class="btn-bg-anim"></div>
+                                <span class="material-symbols-outlined btn-icon-spin">radar</span>
+                                <span>Execute Deep Recon</span>
+                                <div class="btn-edge-glow"></div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Loader View -->
+                <div class="loader-view" id="loaderView" style="display: none;">
+                    <div class="radar-container">
+                        <div class="radar-sweep"></div>
+                        <div class="radar-pulse"></div>
+                        <div class="radar-pulse"></div>
+                        <div class="radar-pulse"></div>
+                        <div class="orbital-ring">
+                            <div class="orbital-dot"></div>
+                        </div>
+                        <div class="orbital-ring ring-reverse">
+                            <div class="orbital-dot dot-2"></div>
+                        </div>
+                        <span class="material-symbols-outlined radar-icon">search_insights</span>
+                    </div>
+                    <div class="loader-status">
+                        <h3 id="loaderTitle" class="decode-animate">Analyzing Identity...</h3>
+                        <p id="loaderMessage" class="text-dim">Querying global intelligence databases.</p>
+                        <div class="loader-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                                <div class="progress-glow"></div>
+                            </div>
+                            <span class="progress-text" id="progressText">INITIALIZING...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results View -->
+                <div class="results-view" id="resultsView" style="display: none;">
+                    <!-- Interactive Graph Container -->
+                    <div id="osintNetworkGraph" class="network-graph holo-card" style="display: none; height: 350px; border: 1px solid rgba(0,212,255,0.2); border-radius: 16px; margin-bottom: 24px; position: relative; overflow: hidden; background: rgba(5,6,8,0.7); backdrop-filter: blur(10px);"></div>
+                    <div id="resultCardsGrid" class="cards-grid"></div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
