@@ -494,9 +494,12 @@ function parseAndRenderOutput(raw) {
         });
     }
 
-    // 2. ASCII Tables
+    // 2. ASCII Tables (supports both Unicode box-drawing AND ASCII fallback)
     lines.forEach(line => {
-        const isTableLine = /[\u2500-\u257F\u250c\u2500\u2502\u251c\u2524\u252c\u2534\u253c]/.test(line);
+        // Match Unicode box-drawing chars OR ASCII table patterns like +---+, |...|
+        const isUnicodeTable = /[\u2500-\u257F\u250c\u2500\u2502\u251c\u2524\u252c\u2534\u253c]/.test(line);
+        const isAsciiTable = /^[\s]*[+|][-+|]+[+|][\s]*$/.test(line) || /^[\s]*\|.*\|[\s]*$/.test(line);
+        const isTableLine = isUnicodeTable || isAsciiTable;
         
         if (isTableLine) {
             if (!isInsideTable) {
@@ -506,7 +509,7 @@ function parseAndRenderOutput(raw) {
                 currentTable.push(line);
             }
         } else if (isInsideTable && line.trim().length > 0) {
-            if (line.includes('───')) {
+            if (line.includes('───') || /^[\s]*[+][-]+[+]/.test(line)) {
                 currentTable.push(line);
             } else {
                 renderTableCard(currentTable.join('\n'));
