@@ -299,6 +299,59 @@ body {
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
+.view-info { margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid rgba(0, 212, 255, 0.1); }
+
+/* SEO Footer Styling */
+.app-seo-footer {
+    margin: 48px 0;
+    padding: 32px;
+    background: rgba(10, 11, 15, 0.6);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+.seo-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+}
+.seo-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-color);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+.seo-section p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+.seo-section p strong {
+    color: var(--accent-color);
+}
+.icon-sm { font-size: 18px !important; }
+
+.ring-2 {
+    width: 52px; height: 52px;
+    border-color: rgba(123, 97, 255, 0.15);
+    animation-direction: reverse;
+    animation-duration: 12s;
+}
+
+.ring-2::before {
+    background: var(--accent-secondary);
+    box-shadow: 0 0 6px var(--accent-secondary);
+}
+
+@keyframes logoRingSpin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
 .logo-text-group {
     display: flex;
     flex-direction: column;

@@ -342,6 +342,8 @@ function renderSidebar() {
             const btn = document.createElement('button');
             btn.className = `nav-item ${tool.id === currentTool.id ? 'active' : ''}`;
             btn.style.animationDelay = `${index * 0.05}s`;
+            btn.title = tool.desc;
+            btn.setAttribute('aria-label', `${tool.name} - ${tool.category}`);
             btn.onclick = () => {
                 if (isTaskRunning) return;
                 document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
@@ -367,6 +369,12 @@ function renderSidebar() {
 
 function setActiveTool(tool) {
     currentTool = tool;
+    
+    // SEO Dynamic Title Update
+    const seoTitle = tool.name.includes("Phone") ? "Phone Tracker" : 
+                     tool.name.includes("Location") || tool.name.includes("Address") ? "Location Tracker" : 
+                     tool.name;
+    document.title = `${seoTitle} | Specter Intelligence Advanced OSINT`;
 
     resultCardsGrid.innerHTML = '';
     resultsView.style.display = 'none';

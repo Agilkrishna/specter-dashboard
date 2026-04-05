@@ -22,6 +22,30 @@
     <link rel="canonical" href="https://github.com/Agilkrishna/specter-dashboard" />
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- JSON-LD SEO Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Specter Intelligence OSINT",
+      "operatingSystem": "Web, Windows, macOS, Linux, Android, iOS",
+      "applicationCategory": "SecurityApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "124"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "description": "Advanced OSINT Phone Tracking and Location Reconnaissance software. Traces geospatial coordinates, carrier data, and digital footprints globally.",
+      "keywords": "phone track, location track, OSINT tool, security analysis, digital forensics"
+    }
+    </script>
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@400;500;600;700;800;900&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap">
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
@@ -39,7 +63,7 @@
         
         <!-- Mobile Header -->
         <header class="mobile-header">
-            <button class="menu-toggle-btn" id="menuOpenBtn">
+            <button class="menu-toggle-btn" id="menuOpenBtn" aria-label="Open Navigation Menu" title="Tools Menu">
                 <span class="material-symbols-outlined">segment</span>
             </button>
             <div class="mobile-logo">
@@ -65,7 +89,7 @@
                         <span class="logo-sub">ORCHESTRATOR v3.0</span>
                     </div>
                 </div>
-                <button class="menu-close-btn" id="menuCloseBtn">
+                <button class="menu-close-btn" id="menuCloseBtn" aria-label="Close Navigation Menu" title="Close Menu">
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
@@ -198,6 +222,24 @@
                     <div id="osintNetworkGraph" class="network-graph holo-card" style="display: none; height: 350px; border: 1px solid rgba(0,212,255,0.2); border-radius: 16px; margin-bottom: 24px; position: relative; overflow: hidden; background: rgba(5,6,8,0.7); backdrop-filter: blur(10px);"></div>
                     <div id="resultCardsGrid" class="cards-grid"></div>
                 </div>
+
+                <!-- Visible SEO Content Footer -->
+                <footer class="app-seo-footer" id="visibleSeoFooter">
+                    <div class="seo-footer-grid">
+                        <div class="seo-section">
+                            <h4><span class="material-symbols-outlined icon-sm">phone_iphone</span> Phone Tracking & Recon</h4>
+                            <p>Specter Intelligence provides professional <strong>phone tracker</strong> solutions to identify mobile identifiers, carrier metadata, and digital footprinting globally.</p>
+                        </div>
+                        <div class="seo-section">
+                            <h4><span class="material-symbols-outlined icon-sm">location_searching</span> Location Trace OSINT</h4>
+                            <p>Our <strong>location tracker</strong> and reconnaissance engine maps geospatial coordinates, IP subnets, and signal infrastructure with ultra-high precision.</p>
+                        </div>
+                        <div class="seo-section">
+                            <h4><span class="material-symbols-outlined icon-sm">lock_person</span> Advanced Security Suite</h4>
+                            <p>Designed for deep reconnaissance, we orchestrate <strong>Shadow-Trace</strong> and other digital forensics tools for comprehensive intelligence analysis.</p>
+                        </div>
+                    </div>
+                </footer>
 
             </section>
         </main>

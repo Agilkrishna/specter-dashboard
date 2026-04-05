@@ -1,0 +1,9 @@
+# Robot Exclusion Protocol for Specter Intelligence
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+Disallow: /osint_tools/
+Disallow: /venv/
+Disallow: /api/
+
+Sitemap: https://specter-dashboard.onrender.com/sitemap.xml
