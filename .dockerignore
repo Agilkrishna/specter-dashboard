@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+osint_tools/venv
+venv
+.env
+.git
+.gitignore
+Dockerfile
+.dockerignore
+setup_osint_tools.ps1
+README.md
+*.log

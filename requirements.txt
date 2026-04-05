@@ -1,0 +1,10 @@
+# Consistently managed requirements for Specter OSINT Tools
+requests
+beautifulsoup4
+terminaltables
+exifread
+colorama
+dnspython
+phonenumbers
+lxml
+exif
